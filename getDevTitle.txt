@@ -1,0 +1,11 @@
+getTitle <- function(dev=dev.cur()) {
+    all_pointers <- getWindowsHandles(which="R", minimized=TRUE)
+    all_pointers <- sapply(all_pointers, deparse)
+    to_find <- deparse(getWindowsHandle(dev))
+    if (to_find=="NULL") {
+        warning("Device not found")
+        NULL
+    } else {
+        names(all_pointers)[to_find==all_pointers]
+    }
+}
